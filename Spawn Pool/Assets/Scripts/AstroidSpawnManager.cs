@@ -10,6 +10,10 @@ public class AstroidSpawnManager : MonoBehaviour
     [SerializeField]
     int initSpawnCount;
 
+    public bool useDestory = false;
+
+    public int createdCount = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +29,8 @@ public class AstroidSpawnManager : MonoBehaviour
     /// <returns>A jreference to the Astroid script on the new object</returns>
     Astroid CreateAstroid()
     {
+        ++createdCount;
+
         Astroid newAstroid = Instantiate(astroidPrefab, transform, false).GetComponent<Astroid>();
 
         newAstroid.manager = this;
@@ -53,14 +59,21 @@ public class AstroidSpawnManager : MonoBehaviour
 
     public void ReturnAstroid(Astroid usedAstroid)
     {
-        //  Reset the transform values
-        usedAstroid.transform.position = transform.position;
-        usedAstroid.transform.rotation = Quaternion.identity;
+        if (useDestory)
+        {
+            Destroy(usedAstroid.gameObject);
+        }
+        else
+        {
+            //  Reset the transform values
+            usedAstroid.transform.position = transform.position;
+            usedAstroid.transform.rotation = Quaternion.identity;
 
-        //  Turn the object off
-        usedAstroid.gameObject.SetActive(false);
+            //  Turn the object off
+            usedAstroid.gameObject.SetActive(false);
 
-        //  Move it to the front of the line
-        usedAstroid.transform.SetAsFirstSibling();
+            //  Move it to the front of the line
+            usedAstroid.transform.SetAsFirstSibling();
+        }
     }
 }
