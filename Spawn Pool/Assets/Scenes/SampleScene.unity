@@ -613,6 +613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fpsLabel: {fileID: 1303641176}
+  tickTime: 0.1
   createdLabel: {fileID: 2005035585}
   spawnCountLabel: {fileID: 237107799}
   useDestoryLabel: {fileID: 172289983}
@@ -860,6 +861,7 @@ MonoBehaviour:
   astroidPrefab: {fileID: 7134442916854164902, guid: f5daf82d6d410be47b798ff2c78aea92, type: 3}
   initSpawnCount: 10
   useDestory: 0
+  createdCount: 0
 --- !u!114 &1504213286
 MonoBehaviour:
   m_ObjectHideFlags: 0

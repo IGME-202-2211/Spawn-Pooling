@@ -8,8 +8,9 @@ public class HUD : MonoBehaviour
     [SerializeField]
     Text fpsLabel;
     const string k_FPS_STR = "FPS: {0}";
+    [SerializeField]
+    float tickTime;
     float timer = 1f;
-    int count = 0;
 
     [SerializeField]
     Text createdLabel;
@@ -33,15 +34,13 @@ public class HUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ++count;
         timer -= Time.deltaTime;
 
         if(timer < 0)
         {
-            fpsLabel.text = string.Format(k_FPS_STR, count);
+            fpsLabel.text = string.Format(k_FPS_STR, 1f / Time.deltaTime);
 
-            count = 0;
-            timer = 1f;
+            timer = tickTime;
         }
 
         createdLabel.text = string.Format(k_CREATED_STR, astroidManager.createdCount);

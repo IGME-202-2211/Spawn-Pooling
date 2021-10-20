@@ -42,11 +42,21 @@ public class AstroidSpawnManager : MonoBehaviour
 
     public Astroid GetAstroid()
     {
-        //  Only get the first in the line
-        Astroid currentAstroid = transform.GetChild(0).GetComponent<Astroid>();
+        Astroid currentAstroid;
 
-        //  Check if all the objects in pool are in use
-        if(currentAstroid == null || currentAstroid.gameObject.activeInHierarchy)
+        //  check if pool is empty
+        if (transform.childCount > 0)
+        {
+            //  Only get the first in the line
+            currentAstroid = transform.GetChild(0).GetComponent<Astroid>();
+
+            //  Check if all the objects in pool are in use
+            if (currentAstroid.gameObject.activeInHierarchy)
+            {
+                currentAstroid = CreateAstroid();
+            }
+        }
+        else
         {
             currentAstroid = CreateAstroid();
         }
